@@ -20,7 +20,7 @@ function Main() {
   const [userdata, setdata] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5001/getusers").then((res) => {
+    axios.get("https://backend-4.onrender.com/getusers").then((res) => {
       setdata(res.data);
       console.log(userdata);
       form.setFieldsValue({
@@ -56,21 +56,25 @@ function Main() {
       phoneNumber: values.pn,
       website: values.website,
     };
-    axios.post("http://localhost:5001/update/" + temp._id, data).then((res) => {
-      console.log(res.data);
+    axios
+      .post("https://backend-4.onrender.com/update/" + temp._id, data)
+      .then((res) => {
+        console.log(res.data);
 
-      axios.get("http://localhost:5001/getusers").then((res) => {
-        setdata(res.data);
+        axios.get("https://backend-4.onrender.com/getusers").then((res) => {
+          setdata(res.data);
+        });
       });
-    });
   };
 
   const deleteitem = (innerdata) => {
-    axios.post("http://localhost:5001/delete/" + innerdata._id).then((res) => {
-      axios.get("http://localhost:5001/getusers").then((res) => {
-        setdata(res.data);
+    axios
+      .post("https://backend-4.onrender.com/delete/" + innerdata._id)
+      .then((res) => {
+        axios.get("https://backend-4.onrender.com/getusers").then((res) => {
+          setdata(res.data);
+        });
       });
-    });
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
